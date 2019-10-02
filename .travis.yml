@@ -1,5 +1,8 @@
 dist: bionic
-language: generic
+language: go
+
+go:
+  - 1.x
 
 env:
   global:
@@ -17,10 +20,10 @@ cache:
 
 before_script:
 - sudo apt-get -y update
-- sudo apt-get -y install qemu-user-static binfmt-support qemu kpartx golang
+- sudo apt-get -y install qemu-user-static binfmt-support qemu kpartx
 - sudo update-binfmts --display
 
 script:
-- sudo make -e PWN_HOSTNAME="pwnagotchi" VERSION="$TRAVIS_TAG"
+- sudo -E env "PATH=$PATH" make -e PWN_HOSTNAME="pwnagotchi" VERSION="$TRAVIS_TAG"
 
 # TODO: deploy!
