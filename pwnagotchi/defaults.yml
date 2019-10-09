@@ -1,3 +1,11 @@
+# WARNING * WARNING * WARNING
+#
+# This is the default configuration file, any changes made to this file will be lost.
+# Use /etc/pwnagotchi/config.yml to do any configuration change, by adding just the configuration
+# that needs to be changed
+#
+# WARNING * WARNING * WARNING
+#
 # main algorithm configuration
 main:
     # currently implemented: en (default), de, el, fr, it, mk, nl, ru, se
