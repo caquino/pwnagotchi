@@ -301,43 +301,42 @@
         sudo /opt/vc/bin/tvservice -o
 
   - name: add HDMI powersave to rc.local
-    copy:
+    blockinfile:
       path: /etc/rc.local
       insertbefore: "exit 0"
-      content: |
+      block: |
         if ! /opt/vc/bin/tvservice -s | grep HDMI; then
           /opt/vc/bin/tvservice -o
         fi
 
   - name: create /etc/pwnagotchi/config.yml
-    copy:
+    blockinfile:
       path: /etc/pwnagotchi/config.yml
-      content: |
+      create: yes
+      block: |
         # put here your custom configuration overrides
-        # example on how to change display driver
-        # ui:
-        #   display:
-        #     type: 'inkyphat'
-        #     color: 'black'
 
   - name: configure lo interface
-    copy:
+    blockinfile:
       path: /etc/network/interfaces.d/lo-cfg
-      content: |
+      create: yes
+      block: |
         auto lo
         iface lo inet loopback
 
   - name: configure wlan interface
-    copy:
+    blockinfile:
       path: /etc/network/interfaces.d/wlan0-cfg
-      content: |
+      create: yes
+      block: |
         allow-hotplug wlan0
         iface wlan0 inet static
 
   - name: configure usb interface
-    copy:
+    blockinfile:
       path: /etc/network/interfaces.d/usb0-cfg
-      content: |
+      create: yes
+      block: |
         allow-hotplug usb0
         iface usb0 inet static
           address 10.0.0.2
@@ -347,9 +346,10 @@
           gateway 10.0.0.1
 
   - name: configure eth0 interface (pi2/3/4)
-    copy:
+    blockinfile:
       path: /etc/network/interfaces.d/eth0-cfg
-      content: |
+      create: yes
+      block: |
         allow-hotplug eth0
         iface eth0 inet dhcp
 
